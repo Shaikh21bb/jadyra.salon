@@ -56,10 +56,14 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for fade-in animation
+// Observe elements for fade-in animation with staggered delays
 const animateElements = document.querySelectorAll('.service-card, .advantage-item, .gallery-item, .contact-item, .about-text, .section-title');
-animateElements.forEach(el => {
+animateElements.forEach((el, index) => {
     el.classList.add('fade-in');
+    // Add staggered delay based on element type
+    if (el.classList.contains('service-card') || el.classList.contains('advantage-item')) {
+        el.style.transitionDelay = `${index * 0.1}s`;
+    }
     observer.observe(el);
 });
 
@@ -68,13 +72,28 @@ animateElements.forEach(el => {
 // ============================================
 
 const navbar = document.querySelector('.navbar');
+let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    const currentScroll = window.pageYOffset;
+    
+    // Enhanced navbar shadow on scroll
+    if (currentScroll > 50) {
         navbar.style.boxShadow = '0 4px 20px rgba(155, 126, 217, 0.2)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
     } else {
         navbar.style.boxShadow = '0 2px 10px rgba(155, 126, 217, 0.15)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
     }
+    
+    // Hide/show navbar on scroll (optional enhancement)
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        navbar.style.transform = 'translateY(-100%)';
+    } else {
+        navbar.style.transform = 'translateY(0)';
+    }
+    
+    lastScroll = currentScroll;
 });
 
 // ============================================
@@ -213,14 +232,58 @@ window.addEventListener('load', () => {
 });
 
 // ============================================
-// Parallax Effect for Hero Section (Optional Enhancement)
+// Enhanced Parallax Effect for Hero Section
 // ============================================
 
 const hero = document.querySelector('.hero');
+const heroContent = document.querySelector('.hero-content');
 
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     if (scrolled < hero.offsetHeight) {
         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        heroContent.style.opacity = 1 - (scrolled / hero.offsetHeight) * 0.5;
+        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
     }
+});
+
+// ============================================
+// Animated Counter Effect (for future use)
+// ============================================
+
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        element.textContent = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// ============================================
+// Smooth reveal animation for sections
+// ============================================
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+});
+
+// Apply to all sections
+document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    sectionObserver.observe(section);
 });
