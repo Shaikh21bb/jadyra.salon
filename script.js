@@ -1,289 +1,70 @@
-// ============================================
-// Mobile Navigation Toggle
-// ============================================
+// Плавный скролл по якорям
+document.addEventListener("click", (event) => {
+  const target = event.target;
+  if (target.matches("a[href^='#'], button[data-scroll]")) {
+    const selector = target.getAttribute("href") || target.getAttribute("data-scroll");
+    if (!selector || !selector.startsWith("#")) return;
 
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-menu a');
-
-// Toggle mobile menu
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
+    const section = document.querySelector(selector);
+    if (section) {
+      event.preventDefault();
+      const offset = 70;
+      const top = section.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }
 });
 
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-    });
-});
+// Мобильное меню
+const header = document.querySelector(".site-header");
+const navToggle = document.querySelector(".nav-toggle");
 
-// ============================================
-// Smooth Scrolling for Anchor Links
-// ============================================
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    header.classList.toggle("nav-open");
+  });
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        
-        if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// ============================================
-// Scroll Animations (Fade-in on Scroll)
-// ============================================
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-
-// Observe elements for fade-in animation with staggered delays
-const animateElements = document.querySelectorAll('.service-card, .advantage-item, .gallery-item, .contact-item, .about-text, .section-title');
-animateElements.forEach((el, index) => {
-    el.classList.add('fade-in');
-    // Add staggered delay based on element type
-    if (el.classList.contains('service-card') || el.classList.contains('advantage-item')) {
-        el.style.transitionDelay = `${index * 0.1}s`;
+  document.addEventListener("click", (e) => {
+    if (!header.contains(e.target) && header.classList.contains("nav-open")) {
+      header.classList.remove("nav-open");
     }
-    observer.observe(el);
-});
-
-// ============================================
-// Navbar Background on Scroll
-// ============================================
-
-const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    // Enhanced navbar shadow on scroll
-    if (currentScroll > 50) {
-        navbar.style.boxShadow = '0 4px 20px rgba(155, 126, 217, 0.2)';
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-    } else {
-        navbar.style.boxShadow = '0 2px 10px rgba(155, 126, 217, 0.15)';
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-    }
-    
-    // Hide/show navbar on scroll (optional enhancement)
-    if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.style.transform = 'translateY(-100%)';
-    } else {
-        navbar.style.transform = 'translateY(0)';
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// ============================================
-// Form Validation and Submission
-// ============================================
-
-const bookingForm = document.getElementById('booking-form');
-const formInputs = bookingForm.querySelectorAll('input, select');
-
-// Real-time validation
-formInputs.forEach(input => {
-    input.addEventListener('blur', () => {
-        validateField(input);
-    });
-
-    input.addEventListener('input', () => {
-        if (input.classList.contains('error')) {
-            validateField(input);
-        }
-    });
-});
-
-// Validate individual field
-function validateField(field) {
-    const errorMessage = field.parentElement.querySelector('.error-message');
-    let isValid = true;
-    let errorText = '';
-
-    // Remove previous error styling
-    field.classList.remove('error');
-
-    // Check if field is required and empty
-    if (field.hasAttribute('required') && !field.value.trim()) {
-        isValid = false;
-        errorText = 'Это поле обязательно для заполнения';
-    }
-
-    // Validate phone number format
-    if (field.type === 'tel' && field.value.trim()) {
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-        if (!phoneRegex.test(field.value)) {
-            isValid = false;
-            errorText = 'Пожалуйста, введите корректный номер телефона';
-        }
-    }
-
-    // Validate name (letters and spaces only, including Cyrillic)
-    if (field.id === 'name' && field.value.trim()) {
-        const nameRegex = /^[a-zA-Zа-яА-ЯёЁ\s]+$/;
-        if (!nameRegex.test(field.value.trim())) {
-            isValid = false;
-            errorText = 'Имя должно содержать только буквы';
-        }
-    }
-
-    // Display error or clear it
-    if (!isValid) {
-        field.classList.add('error');
-        errorMessage.textContent = errorText;
-    } else {
-        field.classList.remove('error');
-        errorMessage.textContent = '';
-    }
-
-    return isValid;
+  });
 }
 
-// Form submission handler
-bookingForm.addEventListener('submit', (e) => {
+// Фильтрация услуг
+const serviceCards = Array.from(document.querySelectorAll(".service-card"));
+const serviceTabs = Array.from(document.querySelectorAll(".services-tab"));
+
+function setActiveFilter(filter) {
+  serviceTabs.forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.filter === filter);
+  });
+
+  serviceCards.forEach((card) => {
+    const category = card.dataset.category;
+    if (filter === "all" || filter === category) {
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+    }
+  });
+}
+
+serviceTabs.forEach((tab) => {
+  tab.addEventListener("click", () => setActiveFilter(tab.dataset.filter));
+});
+
+// Обработка формы (демо)
+const form = document.querySelector(".appointment-form");
+if (form) {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
+    const name = form.elements.name.value.trim();
+    const phone = form.elements.phone.value.trim();
 
-    let isFormValid = true;
+    if (!name || !phone) return;
 
-    // Validate all fields
-    formInputs.forEach(input => {
-        if (!validateField(input)) {
-            isFormValid = false;
-        }
-    });
-
-    // If form is valid, process submission
-    if (isFormValid) {
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            service: document.getElementById('service').value
-        };
-
-        // Log form data (in production, this would be sent to a server)
-        console.log('Booking submitted:', formData);
-
-        // Show success message in Russian
-        alert(`Спасибо, ${formData.name}! Ваша заявка на "${getServiceName(formData.service)}" получена. Мы свяжемся с вами по номеру ${formData.phone} в ближайшее время.`);
-
-        // Reset form
-        bookingForm.reset();
-        
-        // Clear any error messages
-        formInputs.forEach(input => {
-            input.classList.remove('error');
-            input.parentElement.querySelector('.error-message').textContent = '';
-        });
-    } else {
-        // Scroll to first error field
-        const firstError = bookingForm.querySelector('.error');
-        if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            firstError.focus();
-        }
-    }
-});
-
-// Helper function to get service name in Russian
-function getServiceName(value) {
-    const services = {
-        'women-haircut': 'Женские стрижки',
-        'men-haircut': 'Мужские стрижки',
-        'children-haircut': 'Детские стрижки',
-        'hair-coloring': 'Окрашивание волос',
-        'styling': 'Укладка',
-        'hair-care': 'Уход за волосами'
-    };
-    return services[value] || value;
+    alert("Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения записи.");
+    form.reset();
+  });
 }
-
-// ============================================
-// Smooth Page Load Animation
-// ============================================
-
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// ============================================
-// Enhanced Parallax Effect for Hero Section
-// ============================================
-
-const hero = document.querySelector('.hero');
-const heroContent = document.querySelector('.hero-content');
-
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    if (scrolled < hero.offsetHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroContent.style.opacity = 1 - (scrolled / hero.offsetHeight) * 0.5;
-        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-});
-
-// ============================================
-// Animated Counter Effect (for future use)
-// ============================================
-
-function animateValue(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        element.textContent = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-// ============================================
-// Smooth reveal animation for sections
-// ============================================
-
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-});
-
-// Apply to all sections
-document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    sectionObserver.observe(section);
-});
