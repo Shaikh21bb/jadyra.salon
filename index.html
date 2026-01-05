@@ -1,289 +1,354 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Салон красоты Jadyra - Красота и Стиль</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">Jadyra</div>
-            <ul class="nav-menu">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#services">Услуги</a></li>
-                <li><a href="#advantages">Преимущества</a></li>
-                <li><a href="#gallery">Галерея</a></li>
-                <li><a href="#booking">Запись</a></li>
-                <li><a href="#contact">Контакты</a></li>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadyra — салон красоты</title>
+    <meta
+      name="description"
+      content="Jadyra — современный салон красоты для женщин. Уход, стиль и уверенность в себе в нежной и спокойной атмосфере."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#hero" class="logo">
+          <span class="logo-mark">J</span>
+          <span class="logo-text">Jadyra</span>
+        </a>
+        <nav class="nav">
+          <a href="#about" class="nav-link">О салоне</a>
+          <a href="#services" class="nav-link">Услуги</a>
+          <a href="#gallery" class="nav-link">Галерея</a>
+          <a href="#appointment" class="nav-link">Запись</a>
+        </nav>
+        <a href="#appointment" class="btn btn-outline header-cta">Записаться</a>
+        <button class="nav-toggle" aria-label="Открыть меню">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="hero" class="hero">
+        <div class="container hero-inner">
+          <div class="hero-content">
+            <p class="hero-tagline">Нежный салон красоты для женщин</p>
+            <h1 class="hero-title">Jadyra — пространство вашей красоты и уверенности</h1>
+            <p class="hero-subtitle">
+              Заботливый уход, элегантный стиль и атмосфера, в которой каждая женщина чувствует
+              себя особенной.
+            </p>
+            <div class="hero-actions">
+              <a href="#appointment" class="btn btn-primary">Записаться</a>
+              <button class="btn-link" data-scroll="#services">Посмотреть услуги</button>
+            </div>
+            <div class="hero-meta">
+              <span>Женские образы любой сложности</span>
+              <span>Мужские и детские стрижки</span>
+              <span>Уютная и спокойная атмосфера</span>
+            </div>
+          </div>
+          <div class="hero-media">
+            <!-- Просто замените src на фото салона -->
+            <div class="hero-photo main-photo">
+              <img
+                src="https://images.pexels.com/photos/3738341/pexels-photo-3738341.jpeg"
+                alt="Интерьер салона красоты Jadyra"
+              />
+            </div>
+            <div class="hero-photo secondary-photo">
+              <img
+                src="https://images.pexels.com/photos/3738348/pexels-photo-3738348.jpeg"
+                alt="Работа мастера салона Jadyra"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section section-soft">
+        <div class="container section-inner">
+          <div class="section-header">
+            <h2 class="section-title">О салоне Jadyra</h2>
+            <p class="section-subtitle">
+              Jadyra — это современный салон красоты, созданный для женщин, которые ценят мягкий
+              уход, элегантность и спокойствие.
+            </p>
+          </div>
+          <div class="about-grid">
+            <div class="about-text">
+              <p>
+                Мы верим, что истинная красота рождается из заботы о себе. В Jadyra каждая
+                процедура — это маленький ритуал, который помогает почувствовать гармонию,
+                легкость и уверенность в себе.
+              </p>
+              <p>
+                Основное направление салона — женские услуги: стрижки, укладки, окрашивание,
+                уходовые процедуры и создание образов для особых событий. Мы уделяем внимание
+                деталям, чтобы результат выглядел естественно, дорого и утончённо.
+              </p>
+              <p>
+                Также мы с заботой выполняем аккуратные мужские стрижки и нежные детские прически,
+                сохраняя при этом главный акцент — атмосферу женской красоты и комфорта.
+              </p>
+            </div>
+            <div class="about-highlight">
+              <h3>Почему выбирают Jadyra</h3>
+              <ul class="about-list">
+                <li>Нежная, женственная атмосфера без суеты</li>
+                <li>Внимательные мастера и индивидуальный подход</li>
+                <li>Современные техники стрижек и окрашивания</li>
+                <li>Уютный интерьер и расслабляющая музыка</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="section">
+        <div class="container section-inner">
+          <div class="section-header">
+            <h2 class="section-title">Услуги салона</h2>
+            <p class="section-subtitle">
+              Нежные женские образы, аккуратные мужские и детские стрижки — всё, чтобы вы чувствовали
+              себя ухоженно каждый день.
+            </p>
+          </div>
+
+          <div class="services-tabs">
+            <button class="services-tab active" data-filter="all">Все</button>
+            <button class="services-tab" data-filter="women">Женские услуги</button>
+            <button class="services-tab" data-filter="men">Мужские стрижки</button>
+            <button class="services-tab" data-filter="kids">Детские стрижки</button>
+          </div>
+
+          <div class="services-grid">
+            <!-- Women -->
+            <article class="service-card" data-category="women">
+              <h3>Женская стрижка и укладка</h3>
+              <p>
+                Подбор формы и длины с учётом особенностей лица и образа жизни. Лёгкие, женственные
+                линии и естественный объём.
+              </p>
+            </article>
+            <article class="service-card" data-category="women">
+              <h3>Окрашивание и тонирование</h3>
+              <p>
+                Мягкие переливы, естественные оттенки и современные техники окрашивания для
+                сияющих и ухоженных волос.
+              </p>
+            </article>
+            <article class="service-card" data-category="women">
+              <h3>Укладка и локоны</h3>
+              <p>
+                Дневные и вечерние укладки, мягкие локоны и гладкие прически для особых случаев и
+                важных событий.
+              </p>
+            </article>
+            <article class="service-card" data-category="women">
+              <h3>Уходовые процедуры для волос</h3>
+              <p>
+                Восстанавливающие и увлажняющие программы для здоровья волос и кожи головы, блеска
+                и мягкости.
+              </p>
+            </article>
+
+            <!-- Men -->
+            <article class="service-card" data-category="men">
+              <h3>Мужская стрижка</h3>
+              <p>
+                Аккуратные, чистые линии, удобные в ежедневной укладке. Подбор формы с учётом
+                стиля и структуры волос.
+              </p>
+            </article>
+            <article class="service-card" data-category="men">
+              <h3>Укладка и оформление</h3>
+              <p>
+                Стильная укладка, лёгкая текстура и рекомендации по средствам для домашнего ухода.
+              </p>
+            </article>
+
+            <!-- Kids -->
+            <article class="service-card" data-category="kids">
+              <h3>Детская стрижка</h3>
+              <p>
+                Нежные, безопасные и быстрые стрижки для детей с заботой о комфорте и хорошем
+                настроении.
+              </p>
+            </article>
+            <article class="service-card" data-category="kids">
+              <h3>Простые укладки для праздников</h3>
+              <p>
+                Лёгкие прически и локоны для детских праздников, утренников и фотосессий.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallery" class="section section-soft">
+        <div class="container section-inner">
+          <div class="section-header">
+            <h2 class="section-title">Галерея</h2>
+            <p class="section-subtitle">
+              Атмосфера салона и примеры наших работ. Просто замените изображения на свои фото.
+            </p>
+          </div>
+          <div class="gallery-grid">
+            <!-- Замените src на свои изображения интерьера и работ -->
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/3738343/pexels-photo-3738343.jpeg"
+                alt="Интерьер салона красоты"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg"
+                alt="Женская укладка"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/3738344/pexels-photo-3738344.jpeg"
+                alt="Рабочее место мастера"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/3739655/pexels-photo-3739655.jpeg"
+                alt="Женская прическа"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/3738355/pexels-photo-3738355.jpeg"
+                alt="Детская стрижка"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/3739660/pexels-photo-3739660.jpeg"
+                alt="Мужская стрижка"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Appointment Section -->
+      <section id="appointment" class="section appointment-section">
+        <div class="container section-inner appointment-inner">
+          <div class="appointment-text">
+            <h2 class="section-title">Запишитесь в салон Jadyra</h2>
+            <p class="section-subtitle">
+              Выберите удобный способ записи: звонок, WhatsApp или форма. Мы свяжемся с вами, чтобы
+              уточнить детали и подобрать комфортное время.
+            </p>
+            <ul class="appointment-list">
+              <li>Нежная атмосфера и внимательные мастера</li>
+              <li>Удобное расположение и гибкое время работы</li>
+              <li>Забота о вашей красоте и настроении</li>
             </ul>
-            <button class="nav-toggle" aria-label="Меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Салон красоты Jadyra</h1>
-            <p class="hero-slogan">Там, где красота встречается с уверенностью, а стиль становится вашей визитной карточкой</p>
-            <a href="#booking" class="btn-primary">Записаться</a>
-        </div>
-        <div class="scroll-indicator">
-            <span></span>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">О нашем салоне</h2>
-            <div class="about-content">
-                <p class="about-text">
-                    Салон красоты Jadyra — это место, где красота становится искусством. 
-                    Каждый гость для нас — уникален, а каждый образ — продуман до деталей. 
-                    Объединяя актуальные бьюти-тренды и классические техники, наши стилисты создают образы, 
-                    которые раскрывают вашу природную красоту и усиливают уверенность.
-                </p>
-                <p class="about-text">
-                    Мы используем только премиальные материалы и современное оборудование, 
-                    чтобы обеспечить вам максимальный комфорт и безупречный результат. 
-                    В уютной атмосфере нашего салона вы сможете расслабиться и довериться профессионалам.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Наши услуги</h2>
-            <div class="services-grid">
-                <!-- Women's Haircuts - Main Focus -->
-                <div class="service-card featured">
-                    <div class="service-icon">✂️</div>
-                    <h3 class="service-title">Женские стрижки</h3>
-                    <p class="service-description">
-                        Экспертные стрижки, созданные с учётом формы вашего лица, образа жизни и личного стиля. 
-                        От классических каре до современных многослойных стрижек — мы создадим идеальный образ для вас.
-                    </p>
-                </div>
-
-                <!-- Men's Haircuts -->
-                <div class="service-card">
-                    <div class="service-icon">💇</div>
-                    <h3 class="service-title">Мужские стрижки</h3>
-                    <p class="service-description">
-                        Точные стрижки и современная укладка для настоящих джентльменов. 
-                        Профессиональный сервис с вниманием к деталям.
-                    </p>
-                </div>
-
-                <!-- Children's Haircuts -->
-                <div class="service-card">
-                    <div class="service-icon">👶</div>
-                    <h3 class="service-title">Детские стрижки</h3>
-                    <p class="service-description">
-                        Мягкий и терпеливый подход к нашим самым маленьким клиентам. 
-                        Делаем стрижки приятным и комфортным опытом для детей.
-                    </p>
-                </div>
-
-                <!-- Hair Coloring -->
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3 class="service-title">Окрашивание волос</h3>
-                    <p class="service-description">
-                        Преобразите свой образ с помощью профессионального окрашивания. 
-                        От тонких мелирований до смелых трансформаций.
-                    </p>
-                </div>
-
-                <!-- Styling -->
-                <div class="service-card">
-                    <div class="service-icon">✨</div>
-                    <h3 class="service-title">Укладка</h3>
-                    <p class="service-description">
-                        Укладка для особых случаев, укладка феном и причёски. 
-                        Идеальные образы для любого события или повседневной элегантности.
-                    </p>
-                </div>
-
-                <!-- Hair Care Treatments -->
-                <div class="service-card">
-                    <div class="service-icon">💆</div>
-                    <h3 class="service-title">Уход за волосами</h3>
-                    <p class="service-description">
-                        Питательные процедуры для восстановления, ремонта и поддержания здоровых, 
-                        красивых волос с использованием премиальных продуктов.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Advantages Section -->
-    <section id="advantages" class="why-choose">
-        <div class="container">
-            <h2 class="section-title">Почему выбирают нас</h2>
-            <div class="advantages-grid">
-                <div class="advantage-item">
-                    <div class="advantage-icon">👩‍💼</div>
-                    <h3 class="advantage-title">Профессиональные мастера</h3>
-                    <p class="advantage-text">Наша команда состоит из сертифицированных, опытных профессионалов, преданных совершенству.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon">🌟</div>
-                    <h3 class="advantage-title">Качественные материалы</h3>
-                    <p class="advantage-text">Мы используем только премиальные профессиональные продукты для достижения лучших результатов.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon">💝</div>
-                    <h3 class="advantage-title">Индивидуальный подход</h3>
-                    <p class="advantage-text">Каждый клиент получает персональное внимание и индивидуальный сервис.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon">🏡</div>
-                    <h3 class="advantage-title">Уютная атмосфера</h3>
-                    <p class="advantage-text">Расслабьтесь в нашей тёплой, гостеприимной обстановке, созданной для вашего комфорта.</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="advantage-icon">🔬</div>
-                    <h3 class="advantage-title">Современные техники</h3>
-                    <p class="advantage-text">Будьте впереди с последними трендами и инновационными методами укладки.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2 class="section-title">Галерея работ</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>До и После</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>Работы по укладке</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>Цветовые трансформации</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>Элегантные стрижки</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>Особые случаи</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <span>Уход за волосами</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking Form Section -->
-    <section id="booking" class="booking">
-        <div class="container">
-            <h2 class="section-title">Запись на процедуру</h2>
-            <form id="booking-form" class="booking-form">
-                <div class="form-group">
-                    <label for="name">Имя *</label>
-                    <input type="text" id="name" name="name" required>
-                    <span class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Телефон *</label>
-                    <input type="tel" id="phone" name="phone" required>
-                    <span class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="service">Выбор услуги *</label>
-                    <select id="service" name="service" required>
-                        <option value="">Выберите услугу</option>
-                        <option value="women-haircut">Женские стрижки</option>
-                        <option value="men-haircut">Мужские стрижки</option>
-                        <option value="children-haircut">Детские стрижки</option>
-                        <option value="hair-coloring">Окрашивание волос</option>
-                        <option value="styling">Укладка</option>
-                        <option value="hair-care">Уход за волосами</option>
-                    </select>
-                    <span class="error-message"></span>
-                </div>
-                <button type="submit" class="btn-primary">Отправить заявку</button>
+          </div>
+          <div class="appointment-actions">
+            <!-- Замените href на реальные контакты -->
+            <a href="tel:+77001234567" class="btn btn-primary btn-wide">Позвонить и записаться</a>
+            <a
+              href="https://wa.me/77001234567"
+              class="btn btn-outline btn-wide"
+              target="_blank"
+              rel="noopener"
+            >
+              Записаться в WhatsApp
+            </a>
+            <form class="appointment-form">
+              <div class="form-row">
+                <input type="text" name="name" placeholder="Имя" required />
+              </div>
+              <div class="form-row">
+                <input type="tel" name="phone" placeholder="Телефон" required />
+              </div>
+              <div class="form-row">
+                <textarea
+                  name="comment"
+                  rows="3"
+                  placeholder="Пожелания по услуге или времени"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">Отправить заявку</button>
+              <p class="form-note">
+                Нажимая на кнопку, вы соглашаетесь на обработку персональных данных.
+              </p>
             </form>
+          </div>
         </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Контакты</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-details">
-                            <h3>Адрес</h3>
-                            <p>Проспект Жамбыла, 119</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🕒</div>
-                        <div class="contact-details">
-                            <h3>Режим работы</h3>
-                            <p>Понедельник - Пятница: 9:00 - 20:00</p>
-                            <p>Суббота: 10:00 - 19:00</p>
-                            <p>Воскресенье: 11:00 - 18:00</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-details">
-                            <h3>Мы в соцсетях</h3>
-                            <div class="social-icons">
-                                <a href="#" class="social-icon" aria-label="Instagram">📷</a>
-                                <a href="#" class="social-icon" aria-label="Facebook">👤</a>
-                                <a href="#" class="social-icon" aria-label="WhatsApp">💬</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Sticky Booking Bar -->
+    <div class="sticky-bar">
+      <div class="container sticky-inner">
+        <span class="sticky-text">Готовы к обновлению образа в Jadyra?</span>
+        <a href="#appointment" class="btn btn-primary btn-small">Записаться</a>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-mark">J</span>
+            <span class="logo-text">Jadyra</span>
+          </div>
+          <p class="footer-text">
+            Нежный салон красоты, где о вас заботятся с вниманием и любовью к деталям.
+          </p>
+        </div>
+        <div class="footer-columns">
+          <div class="footer-column">
+            <h3>Контакты</h3>
+            <p>г. Тараз,  пр. Жамбыла 119,</p>
+            <a href="tel:+77073865203" class="footer-link">+7 (707) 386‑52‑03</a>
+          </div>
+          <div class="footer-column">
+            <h3>Социальные сети</h3>
+            <div class="social-links">
+              <!-- Замените # на ссылки на ваши соцсети -->
+              <a href="#" aria-label="Instagram" class="social-icon">
+                <span>IG</span>
+              </a>
+              <a href="#" aria-label="WhatsApp" class="social-icon">
+                <span>WA</span>
+              </a>
+              <a href="#" aria-label="Telegram" class="social-icon">
+                <span>TG</span>
+              </a>
             </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer-text">© Салон красоты Jadyra</p>
-            <p class="footer-tagline">Красота не в лице; красота — это свет в сердце</p>
+      </div>
+      <div class="footer-bottom">
+        <div class="container footer-bottom-inner">
+          <span>© Jadyra, 2026</span>
+          <span>Салон красоты для вашей уверенности</span>
         </div>
+      </div>
     </footer>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
