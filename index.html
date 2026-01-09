@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jadyra — Салон красоты в Таразе</title>
+    <meta
+      name="description"
+      content="Женский салон красоты Jadyra в Таразе: стрижки, укладки, маникюр, педикюр, окрашивание, макияж и другие бьюти-услуги. Адрес: г. Тараз, пр. Жамбыла 119."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#faf5ff',
+                100: '#f3e8ff',
+                200: '#e9d5ff',
+                300: '#d8b4fe',
+                400: '#c084fc',
+                500: '#a855f7',
+                600: '#9333ea',
+                700: '#7e22ce',
+                800: '#6b21a8',
+                900: '#581c87',
+              },
+              accent: {
+                100: '#fdf2ff',
+                200: '#f8e1ff',
+              },
+            },
+            fontFamily: {
+              sans: ['system-ui', 'ui-sans-serif', 'Segoe UI', 'sans-serif'],
+              display: ['Playfair Display', 'serif'],
+            },
+            boxShadow: {
+              soft: '0 18px 45px rgba(88, 28, 135, 0.18)',
+              card: '0 10px 30px rgba(31, 41, 55, 0.08)',
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- React & Babel CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Gentle custom scrollbar (desktop) */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f9f5ff;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c4a5f6;
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a855f7;
+      }
+      body {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+      
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      
+      @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
+      }
+      
+      .animate-fadeInUp {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+      
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+      
+      .animate-slideInRight {
+        animation: slideInRight 0.6s ease-out forwards;
+      }
+      
+      .animate-slideInLeft {
+        animation: slideInLeft 0.6s ease-out forwards;
+      }
+      
+      .animate-scaleIn {
+        animation: scaleIn 0.5s ease-out forwards;
+      }
+      
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      .animate-pulse-slow {
+        animation: pulse 3s ease-in-out infinite;
+      }
+      
+      /* Mobile menu animations */
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .mobile-menu-enter {
+        animation: slideDown 0.3s ease-out forwards;
+      }
+      
+      /* Hamburger menu animation */
+      .hamburger-line {
+        transition: all 0.3s ease;
+      }
+      
+      .hamburger-active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger-active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger-active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      /* Smooth transitions */
+      * {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Mobile optimizations */
+      @media (max-width: 640px) {
+        .mobile-text-sm {
+          font-size: 0.875rem;
+        }
+        .mobile-padding {
+          padding: 1rem;
+        }
+      }
+      
+      /* Intersection Observer fade-in */
+      .fade-in-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      
+      .fade-in-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Button hover effects */
+      .btn-hover-effect {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .btn-hover-effect::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+      
+      .btn-hover-effect:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-primary-50 text-slate-900 antialiased">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      const servicesData = [
+        {
+          title: 'Женские стрижки и укладки',
+          description:
+            'Индивидуальный подбор формы и длины, уходовые процедуры и безупречные укладки для любого случая.',
+          tag: 'Для женщин',
+          image:
+            './images/woman_haircut.jpg',
+        },
+        {
+          title: 'Мужские стрижки',
+          description:
+            'Современные мужские образы, аккуратные стрижки и укладки с учётом ваших предпочтений.',
+          tag: 'Для мужчин',
+          image:
+            'https://images.pexels.com/photos/3998429/pexels-photo-3998429.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        },
+        {
+          title: 'Маникюр',
+          description:
+            'Классический, аппаратный и комбинированный маникюр, выверенная форма и аккуратный кутикул.',
+          tag: 'Ногтевой сервис',
+          image:
+            './images/manicure.jpg',
+        },
+        {
+          title: 'Педикюр',
+          description:
+            'Уход за стопами, эстетический и лечебный педикюр в атмосфере полного расслабления.',
+          tag: 'Ногтевой сервис',
+          image:
+            './images/pedicure.jpg',
+        },
+        {
+          title: 'Окрашивание волос',
+          description:
+            'Деликатные техники окрашивания, блонд, шатуш, омбре, а также восстановление и уход.',
+          tag: 'Цвет и уход',
+          image:
+            './images/haircolor.jpg',
+        },
+        {
+          title: 'Макияж',
+          description:
+            'Дневной, вечерний и свадебный макияж, подчеркивающий естественную женственность и красоту.',
+          tag: 'Make-up',
+          image:
+            './images/makeup.jpg', 
+        },
+        {
+          title: 'Другие бьюти-услуги',
+          description:
+            'Брови, ресницы, уходовые процедуры и комплексные программы преображения для вас.',
+          tag: 'Beauty',
+          image:
+            './images/other.jpg',
+        },
+      ];
+
+      const scrollToSection = (id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+
+      const BookingModal = ({ isOpen, onClose }) => {
+        const [form, setForm] = useState({
+          name: '',
+          phone: '',
+          service: '',
+          date: '',
+          time: '',
+          message: '',
+        });
+
+        useEffect(() => {
+          if (isOpen) {
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.overflow = '';
+          }
+          return () => {
+            document.body.style.overflow = '';
+          };
+        }, [isOpen]);
+
+        if (!isOpen) return null;
+
+        const handleChange = (e) => {
+          const { name, value } = e.target;
+          setForm((prev) => ({ ...prev, [name]: value }));
+        };
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          alert(
+            'Спасибо за вашу заявку, ' +
+              (form.name || 'клиент') +
+              '! Мы свяжемся с вами для подтверждения записи.'
+          );
+          onClose();
+        };
+
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6 animate-fadeIn">
+            <div
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fadeIn"
+              onClick={onClose}
+            />
+            <div className="relative w-full max-w-lg rounded-3xl bg-white/95 p-6 sm:p-8 shadow-soft animate-scaleIn">
+              <button
+                className="absolute right-4 top-4 rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 hover:bg-primary-100 transition-all hover:scale-110"
+                onClick={onClose}
+              >
+                ✕ Закрыть
+              </button>
+              <h2 className="mb-2 text-center font-display text-2xl sm:text-3xl font-semibold text-primary-800">
+                Записаться в салон Jadyra
+              </h2>
+              <p className="mb-6 text-center text-sm text-slate-600">
+                Оставьте ваши данные, и наш администратор перезвонит вам для уточнения деталей.
+              </p>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700">
+                      Имя
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      className="w-full rounded-2xl border border-primary-100 bg-primary-50/60 px-3 py-2.5 text-sm shadow-sm outline-none transition-all focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-200 focus:scale-[1.02]"
+                      placeholder="Как к вам обращаться"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700">
+                      Телефон
+                    </label>
+                    <input
+                      required
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      className="w-full rounded-2xl border border-primary-100 bg-primary-50/60 px-3 py-2.5 text-sm shadow-sm outline-none transition-all focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-200 focus:scale-[1.02]"
+                      placeholder="+7 ___ ___ __ __"
+                    />
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700">
+                      Услуга
+                    </label>
+                    <select
+                      name="service"
+                      value={form.service}
+                      onChange={handleChange}
+                      className="w-full rounded-2xl border border-primary-100 bg-primary-50/60 px-3 py-2.5 text-sm shadow-sm outline-none transition-all focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-200 focus:scale-[1.02]"
+                    >
+                      <option value="">Выберите услугу</option>
+                      <option>Женская стрижка и укладка</option>
+                      <option>Мужская стрижка</option>
+                      <option>Маникюр</option>
+                      <option>Педикюр</option>
+                      <option>Окрашивание волос</option>
+                      <option>Макияж</option>
+                      <option>Комплексное преображение</option>
+                      <option>Другое</option>
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="mb-1 block text-sm font-medium text-slate-700">
+                        Дата
+                      </label>
+                      <input
+                        type="date"
+                        name="date"
+                        value={form.date}
+                        onChange={handleChange}
+                        className="w-full rounded-2xl border border-primary-100 bg-primary-50/60 px-3 py-2.5 text-sm shadow-sm outline-none transition-all focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-200 focus:scale-[1.02]"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-sm font-medium text-slate-700">
+                        Время
+                      </label>
+                      <input
+                        type="time"
+                        name="time"
+                        value={form.time}
+                        onChange={handleChange}
+                        className="w-full rounded-2xl border border-primary-100 bg-primary-50/60 px-3 py-2.5 text-sm shadow-sm outline-none transition-all focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-200 focus:scale-[1.02]"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-slate-700">
+                    Пожелания
+                  </label>
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    rows="3"
+                    className="w-full rounded-2xl border border-primary-100 bg-primary-50/60 px-3 py-2.5 text-sm shadow-sm outline-none transition-all focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-200 focus:scale-[1.02]"
+                    placeholder="Например: желаемая длина, форма, особые пожелания..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="mt-2 flex w-full items-center justify-center rounded-full bg-primary-600 px-4 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-primary-700 hover:scale-105 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 btn-hover-effect"
+                >
+                  Отправить заявку
+                  <span className="ml-2 animate-pulse">✨</span>
+                </button>
+                <p className="text-center text-xs text-slate-500">
+                  Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.
+                </p>
+              </form>
+            </div>
+          </div>
+        );
+      };
+
+      const App = () => {
+        const [isBookingOpen, setIsBookingOpen] = useState(false);
+        const [showFab, setShowFab] = useState(false);
+        const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+        useEffect(() => {
+          const onScroll = () => {
+            setShowFab(window.scrollY > 200);
+          };
+          window.addEventListener('scroll', onScroll);
+          return () => window.removeEventListener('scroll', onScroll);
+        }, []);
+
+        // Intersection Observer for scroll animations
+        useEffect(() => {
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+              }
+            });
+          }, observerOptions);
+
+          const elements = document.querySelectorAll('.fade-in-on-scroll');
+          elements.forEach((el) => observer.observe(el));
+
+          return () => {
+            elements.forEach((el) => observer.unobserve(el));
+          };
+        }, []);
+
+        const openBooking = () => {
+          setIsBookingOpen(true);
+          setIsMobileMenuOpen(false);
+        };
+        const closeBooking = () => setIsBookingOpen(false);
+        
+        const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+        
+        const handleMobileNavClick = (sectionId) => {
+          scrollToSection(sectionId);
+          setIsMobileMenuOpen(false);
+        };
+
+        return (
+          <div className="relative min-h-screen">
+            {/* Gradient background accents */}
+            <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+              <div className="absolute -left-20 -top-32 h-72 w-72 rounded-full bg-primary-200/50 blur-3xl" />
+              <div className="absolute -right-10 top-40 h-80 w-80 rounded-full bg-primary-300/40 blur-3xl" />
+              <div className="absolute bottom-0 left-10 h-72 w-72 rounded-full bg-accent-200/60 blur-3xl" />
+            </div>
+
+            {/* Navbar */}
+            <header className="sticky top-0 z-30 border-b border-primary-100/60 bg-white/80 backdrop-blur-xl">
+              <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+                <div
+                  className="flex cursor-pointer items-center gap-3 animate-fadeIn"
+                  onClick={() => scrollToSection('hero')}
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-100 text-primary-700 shadow-card transition-transform hover:scale-110">
+                    <span className="text-lg font-semibold">J</span>
+                  </div>
+                  <div>
+                    <div className="font-display text-xl font-semibold tracking-wide text-primary-800">
+                      Jadyra
+                    </div>
+                    <div className="text-xs font-medium uppercase tracking-[0.15em] text-primary-500">
+                      Beauty Studio
+                    </div>
+                  </div>
+                </div>
+                <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex">
+                  <button
+                    className="transition-all hover:text-primary-700 hover:scale-105"
+                    onClick={() => scrollToSection('services')}
+                  >
+                    Услуги
+                  </button>
+                  <button
+                    className="transition-all hover:text-primary-700 hover:scale-105"
+                    onClick={() => scrollToSection('about')}
+                  >
+                    О салоне
+                  </button>
+                  <button
+                    className="transition-all hover:text-primary-700 hover:scale-105"
+                    onClick={() => scrollToSection('contact')}
+                  >
+                    Контакты
+                  </button>
+                </nav>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={openBooking}
+                    className="hidden rounded-full bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-soft transition-all hover:bg-primary-700 hover:scale-105 hover:-translate-y-0.5 md:inline-flex btn-hover-effect"
+                  >
+                    Записаться
+                  </button>
+                  {/* Mobile menu button */}
+                  <button
+                    onClick={toggleMobileMenu}
+                    className="flex flex-col gap-1.5 rounded-lg p-2 transition-all hover:bg-primary-50 md:hidden"
+                    aria-label="Меню"
+                  >
+                    <span className={`hamburger-line h-0.5 w-6 rounded-full bg-primary-700 transition-all ${isMobileMenuOpen ? 'hamburger-active' : ''}`} />
+                    <span className={`hamburger-line h-0.5 w-6 rounded-full bg-primary-700 transition-all ${isMobileMenuOpen ? 'hamburger-active' : ''}`} />
+                    <span className={`hamburger-line h-0.5 w-6 rounded-full bg-primary-700 transition-all ${isMobileMenuOpen ? 'hamburger-active' : ''}`} />
+                  </button>
+                </div>
+              </div>
+              
+              {/* Mobile Menu */}
+              {isMobileMenuOpen && (
+                <div className="mobile-menu-enter border-t border-primary-100/60 bg-white/95 backdrop-blur-xl md:hidden">
+                  <nav className="mx-auto max-w-6xl px-4 py-4 space-y-3">
+                    <button
+                      onClick={() => handleMobileNavClick('services')}
+                      className="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-700 transition-all hover:bg-primary-50 hover:text-primary-700 hover:scale-[1.02]"
+                    >
+                      ✨ Услуги
+                    </button>
+                    <button
+                      onClick={() => handleMobileNavClick('about')}
+                      className="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-700 transition-all hover:bg-primary-50 hover:text-primary-700 hover:scale-[1.02]"
+                    >
+                      💜 О салоне
+                    </button>
+                    <button
+                      onClick={() => handleMobileNavClick('contact')}
+                      className="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-700 transition-all hover:bg-primary-50 hover:text-primary-700 hover:scale-[1.02]"
+                    >
+                      📍 Контакты
+                    </button>
+                    <button
+                      onClick={openBooking}
+                      className="mt-2 w-full rounded-full bg-primary-600 px-4 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-primary-700 hover:scale-105"
+                    >
+                      Записаться ♡
+                    </button>
+                  </nav>
+                </div>
+              )}
+            </header>
+
+            <main className="mx-auto max-w-6xl px-4 pb-20 pt-6 sm:px-6 sm:pb-20 sm:pt-12 lg:pt-16">
+              {/* Hero Section */}
+              <section
+                id="hero"
+                className="grid items-center gap-8 pb-12 pt-4 sm:gap-10 sm:pb-16 md:grid-cols-[minmax(0,1.1fr),minmax(0,0.9fr)] md:pb-20 lg:gap-14 lg:pb-24"
+              >
+                <div className="space-y-7 fade-in-on-scroll">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-primary-700 shadow-card ring-1 ring-primary-100/80 animate-pulse-slow">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary-500 animate-pulse" />
+                    Женский салон красоты в Таразе
+                  </div>
+                  <div>
+                    <h1 className="font-display text-4xl leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                      Женственность
+                      <br />
+                      <span className="bg-gradient-to-r from-primary-500 via-primary-700 to-primary-500 bg-clip-text text-transparent animate-fadeIn">
+                        в каждом штрихе
+                      </span>
+                    </h1>
+                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+                      <span className="font-semibold text-primary-800">Jadyra</span> — салон
+                      красоты, созданный для женщин, которые ценят мягкую элегантность, утончённый
+                      стиль и безупречный сервис. Мы бережно подчеркиваем вашу природную красоту и
+                      заботимся о каждой детали.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                    <button
+                      onClick={openBooking}
+                      className="inline-flex items-center justify-center rounded-full bg-primary-600 px-6 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:-translate-y-1 hover:bg-primary-700 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 btn-hover-effect sm:px-7"
+                    >
+                      Записаться сейчас
+                      <span className="ml-2 text-base animate-pulse">↗</span>
+                    </button>
+                    <button
+                      onClick={() => scrollToSection('services')}
+                      className="inline-flex items-center justify-center rounded-full bg-white/70 px-4 py-2.5 text-sm font-medium text-primary-700 shadow-card ring-1 ring-primary-100 transition-all hover:bg-primary-50 hover:scale-105 sm:px-5"
+                    >
+                      Смотреть услуги
+                    </button>
+                  </div>
+
+                  <div className="mt-2 grid max-w-md grid-cols-2 gap-4 text-xs text-slate-600 sm:text-sm">
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+                        ✂
+                      </span>
+                      <div>
+                        <div className="font-semibold text-slate-800">Женский акцент</div>
+                        <p className="mt-0.5">
+                          Каждая услуга продумана с особым вниманием к женственности и утончённым
+                          деталям.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+                        ♡
+                      </span>
+                      <div>
+                        <div className="font-semibold text-slate-800">Забота и комфорт</div>
+                        <p className="mt-0.5">
+                          Уютная атмосфера, мягкий свет и деликатный сервис для вашего расслабления.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative fade-in-on-scroll animate-slideInRight">
+                  <div className="absolute -top-6 -left-4 h-20 w-20 rounded-full bg-primary-200/60 blur-2xl animate-pulse-slow" />
+                  <div className="absolute -bottom-4 -right-4 h-28 w-28 rounded-full bg-accent-200/60 blur-2xl animate-pulse-slow" />
+                  <div className="relative rounded-[2.2rem] bg-gradient-to-br from-white/90 via-accent-100/80 to-primary-100/70 p-2 shadow-soft transition-transform hover:scale-[1.02]">
+                    <div className="overflow-hidden rounded-[1.9rem] bg-slate-900/5">
+                      <img
+                        src="./images/home_image.jpg"
+                        alt="Интерьер женского салона красоты Jadyra"
+                        className="h-72 w-full object-cover transition-transform duration-700 hover:scale-110 sm:h-80 md:h-96"
+                      />
+                    </div>
+                    <div className="absolute bottom-4 left-5 flex items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-card backdrop-blur transition-all hover:scale-105 animate-float">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-sm font-semibold text-white">
+                        J
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-600">
+                          JADYRA
+                        </div>
+                        <p className="text-[11px] text-slate-600">
+                          Женский салон красоты &amp; мужские стрижки
+                        </p>
+                      </div>
+                    </div>
+                    <div className="absolute right-4 top-4 rounded-2xl bg-white/95 px-3 py-2 text-xs font-medium text-slate-700 shadow-card transition-all hover:scale-105">
+                      г. Тараз, пр. Жамбыла 119
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Services Section */}
+              <section id="services" className="scroll-mt-24 pb-16 sm:pb-20 lg:pb-24">
+                <div className="mb-8 flex flex-wrap items-end justify-between gap-4 fade-in-on-scroll">
+                  <div>
+                    <h2 className="font-display text-3xl font-semibold text-slate-900 sm:text-4xl">
+                      Услуги салона
+                    </h2>
+                    <p className="mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
+                      Подберите идеальную услугу или комплекс для вашего образа: от аккуратной
+                      стрижки до полного преображения.
+                    </p>
+                  </div>
+                  <button
+                    onClick={openBooking}
+                    className="inline-flex items-center justify-center rounded-full bg-white/80 px-5 py-2.5 text-xs font-semibold text-primary-700 shadow-card ring-1 ring-primary-100 transition-all hover:bg-primary-50 hover:scale-105 sm:text-sm"
+                  >
+                    Помочь выбрать услугу
+                  </button>
+                </div>
+
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {servicesData.map((service, index) => (
+                    <article
+                      key={service.title}
+                      className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/90 shadow-card ring-1 ring-primary-100/60 transition-all hover:-translate-y-2 hover:shadow-soft fade-in-on-scroll"
+                      style={{
+                        transitionDelay: `${index * 50}ms`,
+                      }}
+                    >
+                      <div className="relative h-40 overflow-hidden sm:h-44">
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-slate-900/0 to-transparent transition-opacity group-hover:opacity-80" />
+                        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-primary-700 shadow-card transition-all group-hover:scale-105">
+                          {service.tag}
+                        </span>
+                      </div>
+                      <div className="flex flex-1 flex-col p-4 sm:p-5">
+                        <h3 className="text-base font-semibold text-slate-900 transition-colors group-hover:text-primary-700 sm:text-lg">
+                          {service.title}
+                        </h3>
+                        <p className="mt-2 flex-1 text-sm text-slate-600">
+                          {service.description}
+                        </p>
+                        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-xs text-slate-500">
+                          <span className="flex items-center gap-1">
+                            ✨ Индивидуальный подбор мастера
+                          </span>
+                          <button
+                            onClick={openBooking}
+                            className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3 py-1.5 text-[11px] font-semibold text-primary-700 transition-all hover:bg-primary-100 hover:scale-105 hover:-translate-y-0.5"
+                          >
+                            Записаться
+                            <span className="animate-pulse">↗</span>
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              {/* About Section */}
+              <section
+                id="about"
+                className="scroll-mt-24 rounded-3xl bg-white/80 p-6 shadow-card ring-1 ring-primary-100/70 sm:p-8 lg:p-10 fade-in-on-scroll"
+              >
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr),minmax(0,0.8fr)] lg:items-center">
+                  <div className="fade-in-on-scroll">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-500">
+                      О салоне Jadyra
+                    </p>
+                    <h2 className="mt-3 font-display text-3xl font-semibold text-slate-900 sm:text-4xl">
+                      Пространство женской красоты и вдохновения
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                      В{' '}
+                      <span className="font-semibold text-primary-700">
+                        Jadyra
+                      </span>{' '}
+                      мы верим, что красота — это естественное продолжение вашей индивидуальности.
+                      Наша команда мастеров бережно работает с каждым образом, создавая мягкие,
+                      гармоничные и по-настоящему женственные решения.
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                      Мы уделяем внимание атмосфере: деликатный свет, приятная музыка, аромат и
+                      забота персонала — всё, чтобы вы чувствовали себя защищённо, расслабленно и
+                      особенной. Для мужчин мы также предлагаем стильные и аккуратные стрижки, чтобы
+                      ваши близкие могли разделить с вами этот опыт заботы о себе.
+                    </p>
+                    <div className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
+                      <div className="rounded-2xl bg-primary-50/80 p-4 transition-all hover:scale-105 hover:shadow-md">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
+                          Для неё
+                        </div>
+                        <p className="mt-2 text-slate-700">
+                          Женственные формы, мягкие линии, естественные оттенки — акцент на
+                          элегантности, а не на яркости ради яркости.
+                        </p>
+                      </div>
+                      <div className="rounded-2xl bg-accent-100/80 p-4 transition-all hover:scale-105 hover:shadow-md">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
+                          Для него
+                        </div>
+                        <p className="mt-2 text-slate-700">
+                          Современные мужские стрижки в отдельной зоне, где комфортно и спокойно и
+                          мужчинам, и тем, кто пришёл вместе с ними.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 rounded-3xl bg-gradient-to-br from-primary-600 via-primary-700 to-slate-900 p-5 text-primary-50 shadow-soft transition-all hover:scale-[1.02] sm:p-6 fade-in-on-scroll">
+                    <h3 className="font-display text-xl font-semibold">
+                      Адрес и контакты
+                    </h3>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-start gap-3">
+                        <span className="mt-0.5 text-lg">📍</span>
+                        <div>
+                          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-200">
+                            Адрес
+                          </div>
+                          <p className="mt-0.5 text-primary-50">
+                            г. Тараз, пр. Жамбыла 119
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="mt-0.5 text-lg">⏰</span>
+                        <div>
+                          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-200">
+                            Режим работы
+                          </div>
+                          <p className="mt-0.5">
+                            Ежедневно с 10:00 до 20:00
+                            <br />
+                            По предварительной записи
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="mt-0.5 text-lg">☎️</span>
+                        <div>
+                          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-200">
+                            Телефон
+                          </div>
+                          <p className="mt-0.5">
+                            +7 (___) ___-__-__
+                            <span className="block text-xs text-primary-200">
+                              Укажите здесь ваш реальный номер
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={openBooking}
+                      className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-white/95 px-4 py-2.5 text-sm font-semibold text-primary-700 shadow-md transition-all hover:bg-primary-50 hover:scale-105 hover:-translate-y-0.5"
+                    >
+                      Записаться по телефону
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              {/* Contact Section */}
+              <section
+                id="contact"
+                className="scroll-mt-24 pt-12 sm:pt-16 lg:pt-20"
+              >
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr),minmax(0,0.9fr)] lg:items-start">
+                  <div className="fade-in-on-scroll">
+                    <h2 className="font-display text-3xl font-semibold text-slate-900 sm:text-4xl">
+                      Как нас найти
+                    </h2>
+                    <p className="mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
+                      Салон красоты{' '}
+                      <span className="font-semibold text-primary-700">
+                        Jadyra
+                      </span>{' '}
+                      находится в самом сердце Тараза. Мы с радостью встретим вас в тёплой и
+                      душевной атмосфере.
+                    </p>
+                    <div className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
+                      <div className="rounded-2xl bg-white/90 p-4 shadow-card ring-1 ring-primary-100/70 transition-all hover:scale-105 hover:shadow-md">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
+                          Локация
+                        </div>
+                        <p className="mt-2 text-slate-800">
+                          г. Тараз, пр. Жамбыла 119
+                        </p>
+                        <p className="mt-1 text-xs text-slate-500">
+                          Уточните ориентир здесь — торговый центр, перекрёсток и т.д.
+                        </p>
+                      </div>
+                      <div className="rounded-2xl bg-white/90 p-4 shadow-card ring-1 ring-primary-100/70 transition-all hover:scale-105 hover:shadow-md">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
+                          Комфорт
+                        </div>
+                        <p className="mt-2 text-slate-800">
+                          Уютная зона ожидания, напитки и атмосфера полного расслабления.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 fade-in-on-scroll">
+                    <div className="overflow-hidden rounded-3xl bg-slate-900/5 shadow-card ring-1 ring-primary-100/70 transition-all hover:scale-[1.01]">
+                      <div className="h-56 w-full bg-gradient-to-br from-primary-200 via-primary-100 to-accent-200 sm:h-64">
+                        <div className="flex h-full flex-col items-center justify-center px-6 text-center">
+                          <div className="mb-3 inline-flex rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-primary-700 shadow-card animate-pulse-slow">
+                            Здесь может быть ваша карта
+                          </div>
+                          <p className="max-w-xs text-sm text-slate-700">
+                            Вставьте виджет карты (например, Яндекс.Карты или Google Maps) по адресу
+                            <span className="block font-semibold text-primary-800">
+                              г. Тараз, пр. Жамбыла 119
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white/90 px-5 py-4 text-sm text-slate-700 shadow-card ring-1 ring-primary-100/70 transition-all hover:scale-[1.01]">
+                      <div>
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
+                          Запись онлайн и по телефону
+                        </div>
+                        <p className="mt-1 text-slate-700">
+                          Выберите удобный способ записи — мы всегда на связи.
+                        </p>
+                      </div>
+                      <button
+                        onClick={openBooking}
+                        className="inline-flex items-center justify-center rounded-full bg-primary-600 px-4 py-2 text-xs font-semibold text-white shadow-soft transition-all hover:bg-primary-700 hover:scale-105 hover:-translate-y-0.5 sm:text-sm"
+                      >
+                        Записаться
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </main>
+
+            {/* Floating CTA button */}
+            {showFab && (
+              <button
+                onClick={openBooking}
+                className="fixed bottom-6 right-4 z-40 inline-flex items-center gap-2 rounded-full bg-primary-600 px-4 py-2.5 text-xs font-semibold text-white shadow-soft transition-all hover:-translate-y-1 hover:bg-primary-700 hover:scale-110 animate-float sm:right-6 sm:text-sm"
+                style={{
+                  animation: 'float 3s ease-in-out infinite',
+                }}
+              >
+                Записаться
+                <span className="text-base animate-pulse">♡</span>
+              </button>
+            )}
+
+            {/* Footer */}
+            <footer className="border-t border-primary-100/70 bg-white/80 py-5 text-xs text-slate-500">
+              <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 sm:flex-row sm:px-6">
+                <p>© {new Date().getFullYear()} Салон красоты «Jadyra». Все права защищены.</p>
+                <p className="text-[11px] sm:text-xs">
+                  Адрес: г. Тараз, пр. Жамбыла 119 · Женский салон красоты · Мужские стрижки
+                </p>
+              </div>
+            </footer>
+
+            <BookingModal isOpen={isBookingOpen} onClose={closeBooking} />
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
+
